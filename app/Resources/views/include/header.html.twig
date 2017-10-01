@@ -1,0 +1,21 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+{% block javascripts %}
+    {% javascripts '%kernel.root_dir%/Resources/js/lib/jquery-3.2.1.min.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% javascripts '%kernel.root_dir%/Resources/js/lib/bootstrap.min.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% javascripts '%kernel.root_dir%/Resources/js/lib/json2.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock%}
+
+{% block stylesheets %}
+    {% stylesheets '%kernel.root_dir%/Resources/css/lib/*' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
