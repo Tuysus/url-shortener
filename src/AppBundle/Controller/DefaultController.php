@@ -113,7 +113,7 @@ class DefaultController extends BaseController
             $n = $data[0]->getNumberOfUsage();
             $data[0]->setNumberOfUsage(++$n);
             $em->flush();
-            return new RedirectResponse("http://" . $data[0]->getOriginalUrl()); //$this->redirect('https://google.com');
+            return new RedirectResponse($data[0]->getOriginalUrl());
         } else {
             throw new NotFoundHttpException('404 page not found');
 //            return $this->render('default/index.html.twig');
