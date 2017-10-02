@@ -3,12 +3,11 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\UrlService;
 
-class DefaultController extends Controller
+class DefaultController extends BaseController
 {
     /**
      * @Route("/", name="homepage")
@@ -32,9 +31,13 @@ class DefaultController extends Controller
         $validation = $service->urlValidation($data);
 
         if($validation == true) {
-            $response = $service->generateShortUrl();
+            $response = $this->setResultSuccess([
+                'value' => $service->generateShortUrl()
+            ]);
         } else {
-            $response = "url is invalid";
+            $response = $this->setResultError([
+                'message' => "url is invalid"
+            ]);
         }
 
         return new JsonResponse($response);

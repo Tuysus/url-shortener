@@ -10,7 +10,10 @@
     {% endjavascripts %}
 
     {% javascripts '%kernel.root_dir%/Resources/js/lib/json2.js' %}
-    <script src="{{ asset_url }}"></script>
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% javascripts '%kernel.root_dir%/Resources/js/lib/util.js' %}
+        <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock%}
 

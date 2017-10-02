@@ -56,7 +56,8 @@ class UrlService
             $pass[] = $chars[$n];
         }
 
-        $shortUrl = 'http://url_shorter.local/' . implode($pass);
+//        $shortUrl = 'http://url_shorter.local/' . implode($pass);
+        $shortUrl = implode($pass);
 
         return $shortUrl;
     }
