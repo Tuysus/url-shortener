@@ -89,7 +89,7 @@ class DefaultController extends BaseController
             $em->flush();
 
             $response =  $response = $this->setResultSuccess([
-                'value' => "saved"
+                'value' => $url->getShortUrl()
             ]);
         }
 
@@ -118,9 +118,6 @@ class DefaultController extends BaseController
 //            throw $this->createNotFoundException();
             return $this->render('default/index.html.twig');
         }
-
-//        $data->set('New product name!');
-//        $em->flush();
 
     }
 }

@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <label for="url-input" class="col-sm-3 control-label">URL:</label>
                         <div class="col-sm-7">
-                            <input type="text" id="url-input" class="form-control input-sm">
+                            <input type="text" id="url-input" class="form-control">
                         </div>
                     </div>
                 </form>
@@ -44,18 +44,36 @@
 
             <div class="col-sm-8">
 
-                <form class="form-horizontal text-center" >
+                <form class="form-horizontal text-center" id="url_short-edit">
 
                     <div class="form-group">
                         <label for="url_short-input" class="col-sm-3 control-label">New short url:</label>
                         <div class="col-sm-7">
                             <div class="input-group">
 
-                                <span class="input-group-addon input-sm" >http://url_shorter.local/</span>
-                                <input type="text" id="url_short-input" class="form-control input-sm">
+                                <span class="input-group-addon" >http://url_shortener.local/</span>
+                                <input type="text" id="url_short-input" class="form-control">
 
-                                <span class="input-group-addon input-sm">
-                                    <i id="save-button" class="btn-sm">save</i>
+                                <span class="input-group-btn">
+                                    <button type="button" id="save-button" class="btn btn-default">save</button>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+
+                <form class="form-horizontal text-center" id="url_short-show" hidden>
+
+                    <div class="form-group">
+                        <label for="url_short-input" class="col-sm-3 control-label">New short url:</label>
+                        <div class="col-sm-7">
+                            <div class="input-group">
+
+                                <input type="text" id="url_short-input-show" class="form-control" readonly>
+
+                                <span class="input-group-btn">
+                                    <button type="button" id="clipboard" class="btn btn-default" data-clipboard-target="#url_short-input-show">copy</button>
                                 </span>
                             </div>
 
