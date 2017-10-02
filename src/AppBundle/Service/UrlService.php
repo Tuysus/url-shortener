@@ -6,6 +6,8 @@
  * Time: 2:51
  */
 
+namespace AppBundle\Service;
+
 class UrlService
 {
     /**

@@ -4,8 +4,9 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use UrlService;
+use AppBundle\Service\UrlService;
 
 class DefaultController extends Controller
 {
@@ -31,7 +32,7 @@ class DefaultController extends Controller
         $validation = $service->urlValidation($data);
 
         if($validation == true) {
-
+            $response = "url is valid";
         } else {
             $response = "url is invalid";
         }
