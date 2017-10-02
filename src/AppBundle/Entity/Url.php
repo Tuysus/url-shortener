@@ -34,6 +34,13 @@ class Url
     private $numberOfUsage;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="create_date", type="datetime", nullable=false)
+     */
+    private $createDate;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="url_id", type="string", length=36)
@@ -88,6 +95,22 @@ class Url
     public function setNumberOfUsage(int $numberOfUsage)
     {
         $this->numberOfUsage = $numberOfUsage;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreateDate(): \DateTime
+    {
+        return $this->createDate;
+    }
+
+    /**
+     * @param \DateTime $createDate
+     */
+    public function setCreateDate(\DateTime $createDate)
+    {
+        $this->createDate = $createDate;
     }
 
     /**

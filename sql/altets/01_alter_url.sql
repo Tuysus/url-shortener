@@ -1,0 +1,1 @@
+ALTER TABLE url ADD create_date DATETIME NOT NULL ;

@@ -83,6 +83,7 @@ class DefaultController extends BaseController
             $url->setOriginalUrl($webModel->url);
             $url->setShortUrl($webModel->shortUrl);
             $url->setNumberOfUsage(0);
+            $url->setCreateDate(new \DateTime("now"));
 
             $em->persist($url);
 
