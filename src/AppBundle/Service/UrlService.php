@@ -8,6 +8,7 @@
 
 namespace AppBundle\Service;
 
+
 class UrlService
 {
     /**
@@ -61,4 +62,21 @@ class UrlService
 
         return $shortUrl;
     }
+
+//    public function saveUrl($webModel)
+//    {
+//
+//        $em = $this->getDoctrine()->getMahager;
+//        $url = new Url();
+//
+//        $url->setOriginalUrl("www.google.com");
+//        $url->setShortUrl("mysite.local/abcdef");
+//        $url->setNumberOfUsage(0);
+//
+//        $em->persist($url);
+//
+//        $em->flush();
+//
+//        return $this->render('test.html.twig');
+//    }
 }

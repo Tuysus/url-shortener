@@ -2,10 +2,13 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Url;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\UrlService;
+use Symfony\Component\Serializer\Serializer;
 
 class DefaultController extends BaseController
 {
@@ -25,10 +28,10 @@ class DefaultController extends BaseController
      */
     public function generateUrlAction (Request $request)
     {
-        $data = json_decode($request->getContent());
+        $webModel = json_decode($request->getContent());
         $service = new UrlService();
 
-        $validation = $service->urlValidation($data->url);
+        $validation = $service->urlValidation($webModel->url);
 
         if($validation == true) {
             $response = $this->setResultSuccess([
@@ -51,22 +54,73 @@ class DefaultController extends BaseController
      */
     public function saveShortUrlAction (Request $request)
     {
+        $webModel = json_decode($request->getContent());
 
-        $data = json_decode($request->getContent());
-        $service = new UrlService();
+        $listUrl = $this->getDoctrine()->getRepository(Url::class)->findAll();
 
-//        $validation = $service->urlValidation($data);
-//
-//        if($validation == true) {
-//            $response = $this->setResultSuccess([
-//                'value' => $service->generateShortUrl()
-//            ]);
-//        } else {
-//            $response = $this->setResultError([
-//                'message' => "url is invalid"
-//            ]);
-//        }
+        $result = "WRONG";
+        $response = '';
 
-        return new JsonResponse($data);
+        if (count($listUrl) != 0) {
+        foreach ($listUrl as $item) {
+            if ($item === $webModel->shortUrl) {
+                $response = $this->setResultError([
+                    'message' => "this short url already used"
+                ]);
+                $result = "WRONG";
+                break;
+            } else {
+                $result = "OK";
+            }
+        }} else {
+            $result = "OK";
+        }
+
+        if ($result === "OK") {
+            $em = $this->getDoctrine()->getManager();
+            $url = new Url();
+
+            $url->setOriginalUrl($webModel->url);
+            $url->setShortUrl($webModel->shortUrl);
+            $url->setNumberOfUsage(0);
+
+            $em->persist($url);
+
+            $em->flush();
+
+            $response =  $response = $this->setResultSuccess([
+                'value' => "saved"
+            ]);
+        }
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("{url}", name="redirect")
+     */
+    public function redirectAction($url)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository(Url::class);
+
+        $criteria = array('shortUrl'=> $url);
+
+        $data = $repository->findBy($criteria);
+
+        $n = $data[0]->getNumberOfUsage();
+
+        if ($data) {
+            $data[0]->setNumberOfUsage(++$n);
+            $em->flush();
+            return new RedirectResponse("http://" . $data[0]->getOriginalUrl()); //$this->redirect('https://google.com');
+        } else {
+//            throw $this->createNotFoundException();
+            return $this->render('default/index.html.twig');
+        }
+
+//        $data->set('New product name!');
+//        $em->flush();
+
     }
 }

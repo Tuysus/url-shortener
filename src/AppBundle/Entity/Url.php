@@ -38,9 +38,73 @@ class Url
      *
      * @ORM\Column(name="url_id", type="string", length=36)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="UUID")
      */
     private $urlId;
+
+    /**
+     * @return string
+     */
+    public function getOriginalUrl(): string
+    {
+        return $this->originalUrl;
+    }
+
+    /**
+     * @param string $originalUrl
+     */
+    public function setOriginalUrl(string $originalUrl)
+    {
+        $this->originalUrl = $originalUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortUrl(): string
+    {
+        return $this->shortUrl;
+    }
+
+    /**
+     * @param string $shortUrl
+     */
+    public function setShortUrl(string $shortUrl)
+    {
+        $this->shortUrl = $shortUrl;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberOfUsage(): int
+    {
+        return $this->numberOfUsage;
+    }
+
+    /**
+     * @param int $numberOfUsage
+     */
+    public function setNumberOfUsage(int $numberOfUsage)
+    {
+        $this->numberOfUsage = $numberOfUsage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrlId(): string
+    {
+        return $this->urlId;
+    }
+
+    /**
+     * @param string $urlId
+     */
+    public function setUrlId(string $urlId)
+    {
+        $this->urlId = $urlId;
+    }
 
 
 }
