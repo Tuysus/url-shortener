@@ -25,10 +25,10 @@ class DefaultController extends BaseController
      */
     public function generateUrlAction (Request $request)
     {
-        $data = $request->request->get('url');
+        $data = json_decode($request->getContent());
         $service = new UrlService();
 
-        $validation = $service->urlValidation($data);
+        $validation = $service->urlValidation($data->url);
 
         if($validation == true) {
             $response = $this->setResultSuccess([
@@ -41,5 +41,32 @@ class DefaultController extends BaseController
         }
 
         return new JsonResponse($response);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     *
+     * @Route("short_url", name="saveShortUrl")
+     */
+    public function saveShortUrlAction (Request $request)
+    {
+
+        $data = json_decode($request->getContent());
+        $service = new UrlService();
+
+//        $validation = $service->urlValidation($data);
+//
+//        if($validation == true) {
+//            $response = $this->setResultSuccess([
+//                'value' => $service->generateShortUrl()
+//            ]);
+//        } else {
+//            $response = $this->setResultError([
+//                'message' => "url is invalid"
+//            ]);
+//        }
+
+        return new JsonResponse($data);
     }
 }

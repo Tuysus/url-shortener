@@ -15,7 +15,13 @@ $(document).ready(function () {
     });
 
     $("#save-button").click(function () {
-        alert ("gehejk");
+        $.postJSON('short_url', {url: $("#url-input").val(), shortUrl: $("#url_short-input").val()}, function (data) {
+            if (data && !hasError(data)) {
+                // showShortUrl(data.value);
+
+                return false;
+            }
+        });
     });
 });
 
