@@ -42,4 +42,22 @@ class UrlService
         }
         return $result;
     }
+
+    /**
+     * generate new url
+     */
+    public function generateShortUrl()
+    {
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $pass = array();
+        $charsLength = strlen($chars) - 1;
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $charsLength);
+            $pass[] = $chars[$n];
+        }
+
+        $shortUrl = 'http://url_shorter/' . implode($pass);
+
+        return $shortUrl;
+    }
 }

@@ -32,7 +32,7 @@ class DefaultController extends Controller
         $validation = $service->urlValidation($data);
 
         if($validation == true) {
-            $response = "url is valid";
+            $response = $service->generateShortUrl();
         } else {
             $response = "url is invalid";
         }
