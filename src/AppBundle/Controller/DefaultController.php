@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\UrlService;
-use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends BaseController
 {
@@ -108,15 +108,14 @@ class DefaultController extends BaseController
 
         $data = $repository->findBy($criteria);
 
-        $n = $data[0]->getNumberOfUsage();
-
         if ($data) {
+            $n = $data[0]->getNumberOfUsage();
             $data[0]->setNumberOfUsage(++$n);
             $em->flush();
             return new RedirectResponse("http://" . $data[0]->getOriginalUrl()); //$this->redirect('https://google.com');
         } else {
-//            throw $this->createNotFoundException();
-            return $this->render('default/index.html.twig');
+            throw new NotFoundHttpException('404 page not found');
+//            return $this->render('default/index.html.twig');
         }
 
     }
